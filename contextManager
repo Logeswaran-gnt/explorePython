@@ -1,0 +1,36 @@
+############     CONTEXT MANAGER - PYTHON >PYTHON2.7        #############
+from contextlib import contextmanager
+@contextmanager
+def managed_resource(*args, **kwds):
+    # Code to acquire resource, e.g.:
+    resource = kwds
+    print("one")
+    try:
+        print("two")
+        yield resource
+        print("3")
+    finally:
+        # Code to release resource, e.g.:
+        print("4")
+        print(resource)
+with managed_resource(timeout=3600) as resource:
+    print ("hello")
+    print("5")
+    print (resource)
+with managed_resource(timeout=3600) as resource:
+    print ("hello")
+    print("5")
+    print (resource)
+
+###########    CUSTOM CONTEXT MANAGER - PYTHON >PYTHON3.5         ###########
+from contextlib import ContextDecorator
+class mycontext(ContextDecorator):
+    def __enter__(self):
+        print("enbter")
+    def __exit__(self,*exec):
+        print("end")
+
+@mycontext()
+def myFunction():
+    print("between")
+myFunction()
